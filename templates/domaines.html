@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Domaines professionnels{% endblock %}
+
+{% block content %}
+<div class="domaines-container">
+    <div class="page-header">
+        <h1>Explorez les domaines professionnels</h1>
+        <p>Découvrez les différents secteurs d'activité et leurs métiers</p>
+    </div>
+    
+    <div class="domaines-grid">
+        {% for domaine in domaines %}
+        <div class="domaine-card-modern" style="border-left: 4px solid {{ domaine.couleur }}">
+            <div class="domaine-icon" style="background-color: {{ domaine.couleur }}20">
+                <span style="font-size: 2rem">{{ domaine.icone }}</span>
+            </div>
+            <div class="domaine-content">
+                <h3>{{ domaine.nom }}</h3>
+                <p class="domaine-description">{{ domaine.description|truncatewords:15 }}</p>
+                <div class="domaine-footer">
+                    <span class="metiers-count">
+                        <strong>{{ domaine.nb_metiers }}</strong> offre{{ domaine.nb_metiers|pluralize }} disponible{{ domaine.nb_metiers|pluralize }}
+                    </span>
+                    <a href="{% url 'metiers_domaine' domaine.id %}" class="btn-discover">Découvrir →</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="empty-state">
+            <p>Aucun domaine disponible pour le moment.</p>
+            <p>Les données seront bientôt disponibles.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

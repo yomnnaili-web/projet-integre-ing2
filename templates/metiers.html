@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Métiers{% endblock %}
+
+{% block content %}
+<div class="metiers-container">
+    {% if domaine %}
+    <h1>Métiers - {{ domaine.nom }}</h1>
+    {% else %}
+    <h1>Tous les métiers</h1>
+    {% endif %}
+    
+    <div class="metiers-list">
+        {% for metier in metiers %}
+        <div class="metier-card">
+            <h3>{{ metier.nom }}</h3>
+            <p class="domaine-tag">{{ metier.domaine.nom }}</p>
+            <p>{{ metier.description }}</p>
+            {% if metier.competences %}
+            <div class="competences">
+                <strong>Compétences:</strong> {{ metier.competences }}
+            </div>
+            {% endif %}
+        </div>
+        {% empty %}
+        <p>Aucun métier disponible.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

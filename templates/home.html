@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="hero">
+    <h1>Bienvenue sur OrientationPro</h1>
+    <p>Découvrez votre voie professionnelle</p>
+</div>
+
+<div class="stats">
+    <div class="stat-card">
+        <h3>{{ domaines_count }}</h3>
+        <p>Domaines professionnels</p>
+    </div>
+    <div class="stat-card">
+        <h3>{{ metiers_count }}</h3>
+        <p>Métiers disponibles</p>
+    </div>
+</div>
+
+<div class="features">
+    <div class="feature-card">
+        <h3>Questionnaire d'orientation</h3>
+        <p>Répondez à quelques questions pour découvrir les domaines qui vous correspondent</p>
+        {% if user.is_authenticated %}
+            <a href="{% url 'questionnaire' %}" class="btn">Commencer</a>
+        {% else %}
+            <a href="{% url 'register' %}" class="btn">S'inscrire</a>
+        {% endif %}
+    </div>
+    
+    <div class="feature-card">
+        <h3>Explorer les domaines</h3>
+        <p>Parcourez les différents domaines professionnels et leurs métiers</p>
+        <a href="{% url 'domaines' %}" class="btn">Découvrir</a>
+    </div>
+    
+    <div class="feature-card">
+        <h3>Consulter les métiers</h3>
+        <p>Accédez à la liste complète des métiers et leurs descriptions</p>
+        <a href="{% url 'metiers' %}" class="btn">Voir les métiers</a>
+    </div>
+</div>
+{% endblock %}

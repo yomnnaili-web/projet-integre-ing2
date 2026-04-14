@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Résultats{% endblock %}
+
+{% block content %}
+<div class="resultats-container">
+    <h1>Vos résultats</h1>
+    
+    {% if domaine_recommande %}
+    <div class="resultat-principal">
+        <h2>Domaine recommandé</h2>
+        <div class="domaine-card featured">
+            <h3>{{ domaine_recommande.nom }}</h3>
+            <p>{{ domaine_recommande.description }}</p>
+            <a href="{% url 'metiers_domaine' domaine_recommande.id %}" class="btn">Voir les métiers</a>
+        </div>
+    </div>
+    
+    <div class="autres-domaines">
+        <h2>Autres domaines correspondants</h2>
+        {% for domaine, score in domaines_scores %}
+            {% if domaine != domaine_recommande %}
+            <div class="domaine-card">
+                <h4>{{ domaine.nom }}</h4>
+                <p>Score: {{ score }}</p>
+                <a href="{% url 'metiers_domaine' domaine.id %}">Voir les métiers</a>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>Aucun résultat disponible. Veuillez répondre au questionnaire.</p>
+    <a href="{% url 'questionnaire' %}" class="btn">Répondre au questionnaire</a>
+    {% endif %}
+</div>
+{% endblock %}

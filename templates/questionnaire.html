@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Questionnaire d'orientation{% endblock %}
+
+{% block content %}
+<div class="questionnaire-container">
+    <h1>Questionnaire d'orientation</h1>
+    <p>Répondez aux questions suivantes pour découvrir les domaines qui vous correspondent</p>
+    
+    <form method="post" class="questionnaire-form">
+        {% csrf_token %}
+        
+        {% for question in questions %}
+        <div class="question-block">
+            <h3>{{ forloop.counter }}. {{ question.texte }}</h3>
+            <div class="choices">
+                {% for choix in question.choix.all %}
+                <label class="choice-label">
+                    <input type="radio" name="question_{{ question.id }}" value="{{ choix.id }}" required>
+                    <span>{{ choix.texte }}</span>
+                </label>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+        
+        <button type="submit" class="btn btn-primary">Voir mes résultats</button>
+    </form>
+</div>
+{% endblock %}

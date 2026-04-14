@@ -1,0 +1,4 @@
+Django==4.2.7
+beautifulsoup4==4.12.2
+requests==2.31.0
+mysqlclient==2.2.0
