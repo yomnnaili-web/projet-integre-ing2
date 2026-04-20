@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Orientation Assistant 🤖</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #0f172a; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; color: white; }
+        .chat-container { width: 100%; max-width: 500px; height: 85vh; background: #111827; border-radius: 18px; display: flex; flex-direction: column; box-shadow: 0 10px 40px rgba(0,0,0,0.6); overflow: hidden; }
+        .chat-header { background: #1f2937; padding: 20px; color: #60a5fa; font-weight: bold; text-align: center; font-size: 20px; border-bottom: 1px solid #374151; }
+        .chatbox { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; background: #0b0f1a; }
+        .message { padding: 12px 16px; border-radius: 16px; max-width: 85%; font-size: 15px; word-wrap: break-word; white-space: pre-wrap; }
+        .bot { background: #1f2937; color: #e5e7eb; align-self: flex-start; border-bottom-left-radius: 4px; }
+        .user { background: #2563eb; color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
+        .input-area { display: flex; border-top: 1px solid #374151; padding: 15px; background: #1f2937; gap: 10px; }
+        .input-area input { flex: 1; padding: 12px; border-radius: 10px; border: 1px solid #374151; background: #111827; color: white; outline: none; }
+        .input-area button { padding: 0 20px; border-radius: 10px; border: none; background: #2563eb; color: white; font-weight: bold; cursor: pointer; }
+        .typing { font-size: 12px; color: #9ca3af; padding: 10px; display: none; }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">Career Assistant 🤖</div>
+        <div class="chatbox" id="chatbox">
+            <div class="message bot">Hello! I'm your Career Expert. Ask me anything about studies or jobs.</div>
+        </div>
+        <div id="typing" class="typing">Thinking...</div>
+        <div class="input-area">
+            <input type="text" id="msg" placeholder="Type here..." autocomplete="off">
+            <button id="sendBtn">Send</button>
+        </div>
+    </div>
+    <script>
+        const chatbox = document.getElementById('chatbox');
+        const messageInput = document.getElementById('msg');
+        const typing = document.getElementById('typing');
+
+        function append(text, sender) {
+            const div = document.createElement('div');
+            div.className = `message ${sender}`;
+            div.textContent = text;
+            chatbox.appendChild(div);
+            chatbox.scrollTop = chatbox.scrollHeight;
+        }
+
+        async function send() {
+            const text = messageInput.value.trim();
+            if (!text) return;
+            messageInput.value = '';
+            append(text, 'user');
+            typing.style.display = 'block';
+
+            try {
+                const res = await fetch('/message', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: text })
+                });
+                const data = await res.json();
+                append(data.reply, 'bot');
+            } catch (e) {
+                append("Connection Error. Is app.py running?", "bot");
+            } finally {
+                typing.style.display = 'none';
+            }
+        }
+        document.getElementById('sendBtn').onclick = send;
+        messageInput.onkeypress = (e) => { if(e.key === 'Enter') send(); };
+    </script>
+</body>
+</html>

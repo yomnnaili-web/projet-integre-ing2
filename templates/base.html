@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Orientation Professionnelle{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="{% url 'home' %}" class="logo">OrientationPro</a>
+            <ul class="nav-links">
+                <li><a href="{% url 'home' %}">Accueil</a></li>
+                <li><a href="{% url 'domaines' %}">Domaines</a></li>
+                <li><a href="{% url 'metiers' %}">Métiers</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'questionnaire' %}">Questionnaire</a></li>
+                    <li><a href="{% url 'logout' %}">Déconnexion</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Connexion</a></li>
+                    <li><a href="{% url 'register' %}">Inscription</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 OrientationPro - Projet Intégré</p>
+        </div>
+    </footer>
+
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
