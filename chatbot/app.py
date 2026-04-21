@@ -1,18 +1,25 @@
 import os
 import uuid
 import logging
+from pathlib import Path
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, jsonify, make_response
 from google import genai
 
-load_dotenv()
+env_path = Path(__file__).resolve().parent / ".env"
+print("Looking for .env at:", env_path)
+print("Exists:", env_path.exists())
+
+load_dotenv(env_path)
 
 app = Flask(__name__)
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-api_key = os.getenv("GOOGLE_API_KEY")
+api_key = os.getenv("GOOGLE_API_KEY", "").strip()
+print("Key loaded:", bool(api_key))
+print("Key preview:", api_key[:10] if api_key else "None")
 
 if not api_key:
     print("❌ No API key found in .env")
@@ -62,37 +69,33 @@ def home():
     return resp
 
 
+
 @app.route("/message", methods=["POST"])
 def message():
     user_input = request.json.get("message", "").strip()
     session_id = get_session_id(request)
 
+    print("=== /message hit ===")
+    print("User input:", user_input)
+    print("Key preview:", api_key[:10] if api_key else "None")
+    print("Model:", WORKING_MODEL)
+
     if not user_input:
-        return jsonify({"reply": "Please enter a message."})
+        return jsonify({"reply": "Please enter a message."}), 400
 
     try:
-        if session_id not in chat_histories:
-            chat_histories[session_id] = []
-
-        chat_histories[session_id].append(f"User: {user_input}")
-        context = "\n".join(chat_histories[session_id])
-
         response = client.models.generate_content(
             model=WORKING_MODEL,
-            contents=context
+            contents=user_input
         )
 
-        reply = response.text
-
-        chat_histories[session_id].append(f"AI: {reply}")
-
-        return jsonify({"reply": reply})
+        reply = response.text or "No response text returned."
+        return jsonify({"reply": reply}), 200
 
     except Exception as e:
-        logger.error(e)
-        return jsonify({"reply": f"❌ Error: {str(e)}"})
-
-
+        logger.exception("Route error")
+        return jsonify({"reply": f"❌ Error: {str(e)}"}), 500
+    
 if __name__ == "__main__":
     print("🚀 Running at http://127.0.0.1:5000")
-    app.run(debug=True)
+    app.run(debug=False, use_reloader=False)
