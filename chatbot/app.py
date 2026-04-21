@@ -1,42 +1,98 @@
 import os
-import google.generativeai as genai
-from flask import Flask, render_template, request, jsonify
+import uuid
+import logging
+from dotenv import load_dotenv
+from flask import Flask, render_template, request, jsonify, make_response
+from google import genai
 
-app = Flask(__name__, template_folder='templatestrad', static_folder='static')
+load_dotenv()
 
-# --- CONFIGURATION ---
-# Paste your REAL key from https://aistudio.google.com/ here
-apiKey = "AIzaSyBIgdcFL2dHiH7wHqmXRCA5nM939DLrG-c" 
-genai.configure(api_key=apiKey)
+app = Flask(__name__)
 
-model = genai.GenerativeModel(
-    model_name="gemini-1.5-flash",
-    system_instruction="You are a Career Expert. Only answer questions about studies and jobs."
-)
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
-chat_sessions = {}
+api_key = os.getenv("GOOGLE_API_KEY")
+
+if not api_key:
+    print("❌ No API key found in .env")
+    exit(1)
+
+# Init client
+client = genai.Client(api_key=api_key)
+
+# 🔍 Detect working model automatically
+print("🔍 Detecting available models...")
+
+WORKING_MODEL = None
+
+try:
+    models = client.models.list()
+
+    for m in models:
+        print("Found model:", m.name)
+
+        # pick first usable Gemini model
+        if "gemini" in m.name.lower():
+            WORKING_MODEL = m.name
+            break
+
+    if not WORKING_MODEL:
+        print("❌ No Gemini models available for this API key")
+        exit(1)
+
+    print(f"✅ Using model: {WORKING_MODEL}")
+
+except Exception as e:
+    print("❌ Cannot list models:", e)
+    exit(1)
+
+
+chat_histories = {}
+
+def get_session_id(req):
+    return req.cookies.get("session_id") or str(uuid.uuid4())
 
 @app.route("/")
 def home():
-    return render_template("chat.html")
+    resp = make_response(render_template("chat.html"))
+    session_id = str(uuid.uuid4())
+    resp.set_cookie("session_id", session_id, max_age=7*24*60*60)
+    chat_histories[session_id] = []
+    return resp
+
 
 @app.route("/message", methods=["POST"])
 def message():
-    user_id = request.remote_addr
-    user_input = request.json.get("message")
+    user_input = request.json.get("message", "").strip()
+    session_id = get_session_id(request)
 
-    if user_id not in chat_sessions:
-        chat_sessions[user_id] = model.start_chat(history=[])
+    if not user_input:
+        return jsonify({"reply": "Please enter a message."})
 
     try:
-        chat = chat_sessions[user_id]
-        response = chat.send_message(user_input)
-        return jsonify({"reply": response.text})
+        if session_id not in chat_histories:
+            chat_histories[session_id] = []
+
+        chat_histories[session_id].append(f"User: {user_input}")
+        context = "\n".join(chat_histories[session_id])
+
+        response = client.models.generate_content(
+            model=WORKING_MODEL,
+            contents=context
+        )
+
+        reply = response.text
+
+        chat_histories[session_id].append(f"AI: {reply}")
+
+        return jsonify({"reply": reply})
+
     except Exception as e:
-        print(f"Error: {e}")
-        return jsonify({"reply": "I'm having trouble with the API key or connection."}), 500
+        logger.error(e)
+        return jsonify({"reply": f"❌ Error: {str(e)}"})
+
 
 if __name__ == "__main__":
-    print("--- SERVER STARTING ---")
-    print("Go to http://127.0.0.1:5001")
-    app.run(debug=True, port=5001)
+    print("🚀 Running at http://127.0.0.1:5000")
+    app.run(debug=True)

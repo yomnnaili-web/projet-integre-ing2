@@ -3,69 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Career Orientation Assistant 🤖</title>
-    <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #0f172a; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; color: white; }
-        .chat-container { width: 100%; max-width: 500px; height: 85vh; background: #111827; border-radius: 18px; display: flex; flex-direction: column; box-shadow: 0 10px 40px rgba(0,0,0,0.6); overflow: hidden; }
-        .chat-header { background: #1f2937; padding: 20px; color: #60a5fa; font-weight: bold; text-align: center; font-size: 20px; border-bottom: 1px solid #374151; }
-        .chatbox { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; background: #0b0f1a; }
-        .message { padding: 12px 16px; border-radius: 16px; max-width: 85%; font-size: 15px; word-wrap: break-word; white-space: pre-wrap; }
-        .bot { background: #1f2937; color: #e5e7eb; align-self: flex-start; border-bottom-left-radius: 4px; }
-        .user { background: #2563eb; color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
-        .input-area { display: flex; border-top: 1px solid #374151; padding: 15px; background: #1f2937; gap: 10px; }
-        .input-area input { flex: 1; padding: 12px; border-radius: 10px; border: 1px solid #374151; background: #111827; color: white; outline: none; }
-        .input-area button { padding: 0 20px; border-radius: 10px; border: none; background: #2563eb; color: white; font-weight: bold; cursor: pointer; }
-        .typing { font-size: 12px; color: #9ca3af; padding: 10px; display: none; }
-    </style>
+    <title>Career Orientation Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="chat-container">
         <div class="chat-header">Career Assistant 🤖</div>
         <div class="chatbox" id="chatbox">
-            <div class="message bot">Hello! I'm your Career Expert. Ask me anything about studies or jobs.</div>
+            <div class="message bot">Hello! I'm your Career Orientation Assistant. What field of study or career path would you like to explore today?</div>
         </div>
-        <div id="typing" class="typing">Thinking...</div>
+        <div id="typing" class="typing-indicator">Assistant is thinking...</div>
         <div class="input-area">
-            <input type="text" id="msg" placeholder="Type here..." autocomplete="off">
+            <input type="text" id="msg" placeholder="Ask about jobs, studies, or skills..." autocomplete="off">
             <button id="sendBtn">Send</button>
         </div>
     </div>
+
     <script>
         const chatbox = document.getElementById('chatbox');
         const messageInput = document.getElementById('msg');
-        const typing = document.getElementById('typing');
+        const sendBtn = document.getElementById('sendBtn');
+        const typingIndicator = document.getElementById('typing');
 
-        function append(text, sender) {
-            const div = document.createElement('div');
-            div.className = `message ${sender}`;
-            div.textContent = text;
-            chatbox.appendChild(div);
+        function appendMessage(text, sender) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `message ${sender}`;
+            msgDiv.textContent = text;
+            chatbox.appendChild(msgDiv);
             chatbox.scrollTop = chatbox.scrollHeight;
         }
 
-        async function send() {
-            const text = messageInput.value.trim();
-            if (!text) return;
+        async function sendMessage() {
+            const message = messageInput.value.trim();
+            if (!message) return;
+
             messageInput.value = '';
-            append(text, 'user');
-            typing.style.display = 'block';
+            appendMessage(message, 'user');
+            typingIndicator.style.display = 'block';
 
             try {
-                const res = await fetch('/message', {
+                const response = await fetch('/message', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message: text })
+                    body: JSON.stringify({ message: message })
                 });
-                const data = await res.json();
-                append(data.reply, 'bot');
-            } catch (e) {
-                append("Connection Error. Is app.py running?", "bot");
+
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(data.reply || "Server Error");
+                }
+
+                appendMessage(data.reply, 'bot');
+            } catch (error) {
+                appendMessage("Connection error. Please check console and refresh.", "bot");
+                console.error('Error:', error);
             } finally {
-                typing.style.display = 'none';
+                typingIndicator.style.display = 'none';
             }
         }
-        document.getElementById('sendBtn').onclick = send;
-        messageInput.onkeypress = (e) => { if(e.key === 'Enter') send(); };
+
+        sendBtn.addEventListener('click', sendMessage);
+        messageInput.addEventListener('keypress', (e) => { 
+            if (e.key === 'Enter') sendMessage(); 
+        });
     </script>
 </body>
 </html>
