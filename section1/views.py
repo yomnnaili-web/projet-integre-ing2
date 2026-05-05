@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import CandidateProfile, CompanyProfile, CompanyCandidateMatch, SavedCandidate
-from section1.models import CandidateProfile
-
+from core.models import Question
 
 
 def question_view(request):
-    return render(request, 'section1/questions.html')
+    questions = Question.objects.all().order_by('ordre')
+    return render(request, 'questionnaire.html', {'questions': questions})
 
 def section1(request):
     if request.method == "POST":
