@@ -22,7 +22,7 @@
         <h3>Questionnaire d'orientation</h3>
         <p>Répondez à quelques questions pour découvrir les domaines qui vous correspondent</p>
         {% if user.is_authenticated %}
-            <a href="{% url 'questionnaire' %}" class="btn">Commencer</a>
+            <a href="{% url 'section1' %}" class="btn">Commencer</a>
         {% else %}
             <a href="{% url 'register' %}" class="btn">S'inscrire</a>
         {% endif %}

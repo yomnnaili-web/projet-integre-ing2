@@ -1,0 +1,12 @@
+<h2>Contact {{ candidate.full_name }}</h2>
+
+<form method="post">
+    {% csrf_token %}
+
+    <textarea name="message" placeholder="Write your message..." required></textarea>
+    <br><br>
+
+    <a href="{% url 'contact_candidate' item.candidate.id %}">
+    <button>Contact Candidate</button>
+</a>
+</form>

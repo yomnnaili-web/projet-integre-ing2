@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Questionnaire</title>
+</head>
+<body>
+    <h1>Company Questionnaire</h1>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="section">
+            <h2>Section 1: Company Profile</h2>
+
+            <label>1. Company name:</label>
+            <input type="text" name="company_name" required><br><br>
+
+            <label>2. Industry sector:</label><br>
+            <label><input type="checkbox" name="industry" value="Technology / IT"> Technology / IT</label><br>
+            <label><input type="checkbox" name="industry" value="Business / Finance"> Business / Finance</label><br>
+            <label><input type="checkbox" name="industry" value="Health / Medical"> Health / Medical</label><br>
+            <label><input type="checkbox" name="industry" value="Creative / Media / Design"> Creative / Media / Design</label><br>
+            <label><input type="checkbox" name="industry" value="Law / Consulting"> Law / Consulting</label><br>
+            <label><input type="checkbox" name="industry" value="Other"> Other</label><br><br>
+
+            <label>3. Company size:</label><br>
+            <label><input type="radio" name="company_size" value="Small" required> Small</label><br>
+            <label><input type="radio" name="company_size" value="Medium"> Medium</label><br>
+            <label><input type="radio" name="company_size" value="Large"> Large</label><br><br>
+
+            <label>4. Location preference:</label><br>
+            <label><input type="radio" name="location_pref" value="Local" required> Local</label><br>
+            <label><input type="radio" name="location_pref" value="International"> International</label><br>
+            <label><input type="radio" name="location_pref" value="Remote-friendly"> Remote-friendly</label><br><br>
+
+            <label>5. Does your company hire interns / fresh graduates?</label><br>
+            <label><input type="radio" name="hire_interns" value="Yes" required> Yes</label><br>
+            <label><input type="radio" name="hire_interns" value="No"> No</label><br><br>
+        </div>
+
+        <div class="section">
+            <h2>Section 2: Work Environment & Culture</h2>
+
+            <label>6. Company culture:</label><br>
+            <label><input type="checkbox" name="company_culture" value="Highly structured"> Highly structured</label><br>
+            <label><input type="checkbox" name="company_culture" value="Flexible / Innovative"> Flexible / Innovative</label><br>
+            <label><input type="checkbox" name="company_culture" value="Collaborative & team-oriented"> Collaborative & team-oriented</label><br>
+            <label><input type="checkbox" name="company_culture" value="Independent / autonomous"> Independent / autonomous</label><br><br>
+
+            <label>7. Work pace:</label><br>
+            <label><input type="radio" name="work_pace" value="Slow & steady"> Slow & steady</label><br>
+            <label><input type="radio" name="work_pace" value="Fast-paced & dynamic"> Fast-paced & dynamic</label><br>
+            <label><input type="radio" name="work_pace" value="Balanced"> Balanced</label><br><br>
+
+            <label>8. Management style:</label><br>
+            <label><input type="radio" name="management_style" value="Micromanagement"> Micromanagement</label><br>
+            <label><input type="radio" name="management_style" value="Hands-off, trust employees"> Hands-off, trust employees</label><br>
+            <label><input type="radio" name="management_style" value="Coaching / mentoring"> Coaching / mentoring</label><br><br>
+
+            <label>9. Core values:</label><br>
+            <label><input type="checkbox" name="core_values" value="Innovation"> Innovation</label><br>
+            <label><input type="checkbox" name="core_values" value="Stability"> Stability</label><br>
+            <label><input type="checkbox" name="core_values" value="Creativity"> Creativity</label><br>
+            <label><input type="checkbox" name="core_values" value="Teamwork"> Teamwork</label><br>
+            <label><input type="checkbox" name="core_values" value="Growth / Achievement"> Growth / Achievement</label><br><br>
+
+            <label>10. Ideal work-life balance:</label><br>
+            <label><input type="radio" name="work_life_balance" value="Strict balance, fixed hours"> Strict balance, fixed hours</label><br>
+            <label><input type="radio" name="work_life_balance" value="Flexible schedule"> Flexible schedule</label><br>
+            <label><input type="radio" name="work_life_balance" value="Project-based, high-intensity"> Project-based, high-intensity</label><br><br>
+        </div>
+
+        <div class="section">
+            <h2>Section 3: Talent Needs</h2>
+
+            <label>11. Skills your company values most:</label><br>
+            <label><input type="checkbox" name="skills_required" value="Technical / Programming"> Technical / Programming</label><br>
+            <label><input type="checkbox" name="skills_required" value="Creative / Design"> Creative / Design</label><br>
+            <label><input type="checkbox" name="skills_required" value="Communication / Soft skills"> Communication / Soft skills</label><br>
+            <label><input type="checkbox" name="skills_required" value="Leadership / Management"> Leadership / Management</label><br>
+            <label><input type="checkbox" name="skills_required" value="Business / Analytical"> Business / Analytical</label><br>
+            <label><input type="checkbox" name="skills_required" value="Other"> Other</label><br><br>
+
+            <label>12. Desired experience level:</label><br>
+            <label><input type="radio" name="experience_level_required" value="Intern / Fresh graduate"> Intern / Fresh graduate</label><br>
+            <label><input type="radio" name="experience_level_required" value="1–3 years"> 1–3 years</label><br>
+            <label><input type="radio" name="experience_level_required" value="3–5 years"> 3–5 years</label><br>
+            <label><input type="radio" name="experience_level_required" value="Senior / Expert"> Senior / Expert</label><br><br>
+
+            <label>13. Languages required for work:</label><br>
+            <label><input type="checkbox" name="languages_required" value="English"> English</label><br>
+            <label><input type="checkbox" name="languages_required" value="French"> French</label><br>
+            <label><input type="checkbox" name="languages_required" value="Arabic"> Arabic</label><br>
+            <label><input type="checkbox" name="languages_required" value="Other"> Other</label><br><br>
+
+            <label>14. Risk tolerance / mindset for employees:</label><br>
+            <label><input type="radio" name="risk_tolerance" value="Prefer stability & careful planning"> Prefer stability & careful planning</label><br>
+            <label><input type="radio" name="risk_tolerance" value="Moderate risk-taking"> Moderate risk-taking</label><br>
+            <label><input type="radio" name="risk_tolerance" value="Comfortable with uncertainty & experimentation"> Comfortable with uncertainty & experimentation</label><br><br>
+
+            <label>15. Preferred personality traits:</label><br>
+            <label><input type="checkbox" name="personality_required" value="Logical / Analytical"> Logical / Analytical</label><br>
+            <label><input type="checkbox" name="personality_required" value="Creative / Visionary"> Creative / Visionary</label><br>
+            <label><input type="checkbox" name="personality_required" value="Social / Team player"> Social / Team player</label><br>
+            <label><input type="checkbox" name="personality_required" value="Independent / Self-motivated"> Independent / Self-motivated</label><br><br>
+        </div>
+
+        <div class="section">
+            <h2>Section 4: Compensation & Benefits</h2>
+
+            <label>16. Salary range (optional):</label>
+            <input type="text" name="salary_range"><br><br>
+
+            <label>17. Benefits offered:</label><br>
+            <label><input type="checkbox" name="benefits_offered" value="Health / Medical insurance"> Health / Medical insurance</label><br>
+            <label><input type="checkbox" name="benefits_offered" value="Paid leave / vacation"> Paid leave / vacation</label><br>
+            <label><input type="checkbox" name="benefits_offered" value="Remote work"> Remote work</label><br>
+            <label><input type="checkbox" name="benefits_offered" value="Training / development programs"> Training / development programs</label><br>
+            <label><input type="checkbox" name="benefits_offered" value="Performance bonus"> Performance bonus</label><br><br>
+        </div>
+        <h2>Optional Filters</h2>
+
+<label>Filter by field:</label>
+<select name="filter_field">
+    <option value="">No filter</option>
+    <option value="Engineering / IT">Engineering / IT</option>
+    <option value="Business / Management">Business / Management</option>
+    <option value="Creative / Design">Creative / Design</option>
+    <option value="Social / Communication">Social / Communication</option>
+</select>
+
+<br><br>
+
+<label>Filter by language:</label>
+<select name="filter_language">
+    <option value="">No filter</option>
+    <option value="English">English</option>
+    <option value="French">French</option>
+    <option value="Arabic">Arabic</option>
+</select>
+
+<br><br>
+
+<label>Minimum experience:</label>
+<select name="filter_experience">
+    <option value="">No filter</option>
+    <option value="internship">Internship</option>
+    <option value="parttime">Part-time</option>
+    <option value="freelance">Freelance</option>
+</select>
+
+        <button type="submit">Submit Questionnaire</button>
+    </form>
+</body>
+</html>

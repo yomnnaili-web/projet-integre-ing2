@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section 5 - Current Skills</title>
+</head>
+<body>
+
+    <h1>Section 5</h1>
+    <h2>SECTION: CURRENT SKILLS (Reality Check)</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <p>25. What skills do you already have? (Multiple choice)</p>
+        <label><input type="checkbox" name="q25" value="programming"> Programming</label><br>
+        <label><input type="checkbox" name="q25" value="graphic"> Graphic design</label><br>
+        <label><input type="checkbox" name="q25" value="video"> Video editing / Content creation</label><br>
+        <label><input type="checkbox" name="q25" value="speaking"> Public speaking</label><br>
+        <label><input type="checkbox" name="q25" value="sales"> Sales / persuasion</label><br>
+        <label><input type="checkbox" name="q25" value="writing"> Writing</label><br>
+        <label><input type="checkbox" name="q25" value="data"> Data analysis</label><br>
+        <label><input type="checkbox" name="q25" value="social"> Social media management</label><br>
+        <label><input type="checkbox" name="q25" value="leadership"> Leadership</label><br>
+        <label><input type="checkbox" name="q25" value="none"> None yet</label><br><br>
+
+        <p>26. Your skill level:</p>
+        <label><input type="checkbox" name="q26" value="beginner"> Beginner</label><br>
+        <label><input type="checkbox" name="q26" value="intermediate"> Intermediate</label><br>
+        <label><input type="checkbox" name="q26" value="advanced"> Advanced</label><br><br>
+
+        <p>27. Have you ever:</p>
+        <label><input type="checkbox" name="q27" value="internship"> Done an internship</label><br>
+        <label><input type="checkbox" name="q27" value="parttime"> Worked part-time</label><br>
+        <label><input type="checkbox" name="q27" value="freelance"> Freelanced</label><br>
+        <label><input type="checkbox" name="q27" value="competition"> Participated in competitions</label><br>
+        <label><input type="checkbox" name="q27" value="none"> None yet</label><br><br>
+
+        <button type="submit">Next</button>
+    </form>
+
+</body>
+</html>

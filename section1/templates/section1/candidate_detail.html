@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidate Profile</title>
+</head>
+<body>
+
+    <h1>Candidate Full Profile</h1>
+
+    <div style="border:1px solid #ccc; padding:20px; border-radius:10px;">
+        <h2>{{ candidate.full_name|default:"Candidate" }}</h2>
+
+        <p><strong>Email:</strong> {{ candidate.email }}</p>
+        <p><strong>Recommended Field:</strong> {{ candidate.recommended_field }}</p>
+        <p><strong>Personality Title:</strong> {{ candidate.personality_title }}</p>
+        <p><strong>Confidence Level:</strong> {{ candidate.confidence_level }}</p>
+        <p><strong>Study Type:</strong> {{ candidate.study_type }}</p>
+
+        <hr>
+
+        <h3>Domain Scores</h3>
+        <ul>
+            <li><strong>Engineering / IT:</strong> {{ candidate.engineering_score }}</li>
+            <li><strong>Business / Management:</strong> {{ candidate.business_score }}</li>
+            <li><strong>Creative / Design:</strong> {{ candidate.creative_score }}</li>
+            <li><strong>Social / Communication:</strong> {{ candidate.social_score }}</li>
+        </ul>
+
+        <h3>Skills</h3>
+        <p>{{ candidate.skills|join:", " }}</p>
+
+        <h3>Professional Languages</h3>
+        <p>{{ candidate.professional_languages|join:", " }}</p>
+
+        <h3>Experience</h3>
+        <p>{{ candidate.experience|join:", " }}</p>
+
+        <h3>Work Preferences</h3>
+        <p>{{ candidate.work_preferences|join:", " }}</p>
+
+        <h3>Personality Traits</h3>
+        <p>{{ candidate.personality_traits|join:", " }}</p>
+
+        <hr>
+
+        {% if candidate.linkedin %}
+            <p><strong>LinkedIn:</strong> <a href="{{ candidate.linkedin }}" target="_blank">{{ candidate.linkedin }}</a></p>
+        {% endif %}
+
+        {% if candidate.github %}
+            <p><strong>GitHub:</strong> <a href="{{ candidate.github }}" target="_blank">{{ candidate.github }}</a></p>
+        {% endif %}
+
+        {% if candidate.portfolio %}
+            <p><strong>Portfolio:</strong> <a href="{{ candidate.portfolio }}" target="_blank">{{ candidate.portfolio }}</a></p>
+        {% endif %}
+
+        {% if candidate.cv_name %}
+            <p><strong>CV File Name:</strong> {{ candidate.cv_name }}</p>
+        {% endif %}
+    </div>
+
+    <br>
+
+    <a href="javascript:history.back()">
+        <button>Back</button>
+    </a>
+
+</body>
+</html>

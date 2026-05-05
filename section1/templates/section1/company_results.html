@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommended Candidates</title>
+</head>
+<body>
+
+    <h1>Best Candidates for {{ company.company_name }}</h1>
+
+    {% if best_matches %}
+        <p>Showing top candidates based on your company requirements.</p>
+
+        {% for item in best_matches %}
+
+            {% if item.score >= 70 %}
+                <div style="border:2px solid green; background:#eaffea; padding:20px; margin-bottom:20px; border-radius:10px;">
+            {% elif item.score >= 50 %}
+                <div style="border:2px solid orange; background:#fff4e6; padding:20px; margin-bottom:20px; border-radius:10px;">
+            {% else %}
+                <div style="border:2px solid red; background:#ffeaea; padding:20px; margin-bottom:20px; border-radius:10px;">
+            {% endif %}
+
+                <!-- Rank -->
+                <p><strong>Rank #{{ forloop.counter }}</strong></p>
+
+                <!-- Name + Top badge -->
+                <h3>
+                    {{ item.candidate.full_name|default:"Candidate" }}
+
+                    {% if forloop.first %}
+                        <span style="color:green;"> ⭐ Top Candidate</span>
+                    {% endif %}
+                </h3>
+
+                <p><strong>Email:</strong> {{ item.candidate.email }}</p>
+                <p><strong>Recommended Field:</strong> {{ item.candidate.recommended_field }}</p>
+                <p><strong>Personality:</strong> {{ item.candidate.personality_title }}</p>
+
+                <!-- Score with color -->
+                {% if item.score >= 70 %}
+                    <p><strong>Match Score:</strong> <span style="color:green;">{{ item.score }}</span></p>
+                {% elif item.score >= 50 %}
+                    <p><strong>Match Score:</strong> <span style="color:orange;">{{ item.score }}</span></p>
+                {% else %}
+                    <p><strong>Match Score:</strong> <span style="color:red;">{{ item.score }}</span></p>
+                {% endif %}
+
+                <p><strong>Match Level:</strong> {{ item.label }}</p>
+
+                <p><strong>Skills:</strong> {{ item.candidate.skills|join:", " }}</p>
+                <p><strong>Languages:</strong> {{ item.candidate.professional_languages|join:", " }}</p>
+
+                <!-- Links -->
+                {% if item.candidate.linkedin %}
+                    <p><strong>LinkedIn:</strong> 
+                        <a href="{{ item.candidate.linkedin }}" target="_blank">
+                            {{ item.candidate.linkedin }}
+                        </a>
+                    </p>
+                {% endif %}
+
+                {% if item.candidate.github %}
+                    <p><strong>GitHub:</strong> 
+                        <a href="{{ item.candidate.github }}" target="_blank">
+                            {{ item.candidate.github }}
+                        </a>
+                    </p>
+                {% endif %}
+
+                {% if item.candidate.portfolio %}
+                    <p><strong>Portfolio:</strong> 
+                        <a href="{{ item.candidate.portfolio }}" target="_blank">
+                            {{ item.candidate.portfolio }}
+                        </a>
+                    </p>
+                {% endif %}
+
+                <!-- Reasons -->
+                <p><strong>Why this candidate fits your company:</strong></p>
+                <ul>
+                    {% for reason in item.reasons %}
+                        <li>{{ reason }}</li>
+                    {% endfor %}
+                </ul>
+
+                <!-- Button -->
+                <a href="{% url 'candidate_detail' item.candidate.id %}">
+                    <button>View Full Profile</button>
+                </a><br>
+                <a href="mailto:{{ item.candidate.email }}">
+    <button>Contact Candidate</button>
+</a><a href="{% url 'save_candidate' company.id item.candidate.id %}">
+    <button>⭐ Save</button>
+</a>
+
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+        <p>No strong candidate matches were found. Try relaxing your criteria.</p>
+    {% endif %}
+    <p><strong>AI Insight:</strong></p>
+<p style="background:#f5f5f5; padding:10px; border-radius:8px;">
+    {{ item.explanation }}
+</p>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section 4 - Internal Talents</title>
+</head>
+<body>
+
+    <h1>Section 4</h1>
+    <h2>SECTION: INTERNAL TALENTS & MOTIVATION</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <p>21. What type of tasks make you proud?</p>
+        <label><input type="checkbox" name="q21" value="technical"> Solving technical problems</label><br>
+        <label><input type="checkbox" name="q21" value="creative"> Creating something original</label><br>
+        <label><input type="checkbox" name="q21" value="social"> Helping someone succeed</label><br>
+        <label><input type="checkbox" name="q21" value="business"> Achieving business targets</label><br><br>
+
+        <p>22. If you could master one skill:</p>
+        <label><input type="checkbox" name="q22" value="technical"> Coding / Engineering</label><br>
+        <label><input type="checkbox" name="q22" value="creative"> Design / Art</label><br>
+        <label><input type="checkbox" name="q22" value="social"> Psychology / Communication</label><br>
+        <label><input type="checkbox" name="q22" value="business"> Business / Investment</label><br><br>
+
+        <p>23. What compliment do you hear most?</p>
+        <label><input type="checkbox" name="q23" value="technical"> Smart and logical</label><br>
+        <label><input type="checkbox" name="q23" value="creative"> Creative</label><br>
+        <label><input type="checkbox" name="q23" value="social"> Kind and supportive</label><br>
+        <label><input type="checkbox" name="q23" value="business"> Confident and ambitious</label><br><br>
+
+        <p>24. What frustrates you most in a job?</p>
+        <label><input type="checkbox" name="q24" value="technical"> No intellectual challenge</label><br>
+        <label><input type="checkbox" name="q24" value="creative"> No creativity</label><br>
+        <label><input type="checkbox" name="q24" value="social"> Toxic environment</label><br>
+        <label><input type="checkbox" name="q24" value="business"> No financial growth</label><br><br>
+
+        <button type="submit">Next</button>
+    </form>
+
+</body>
+</html>

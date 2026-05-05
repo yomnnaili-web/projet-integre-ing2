@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saved Candidates</title>
+</head>
+<body>
+
+    <h1>Saved Candidates for {{ company.company_name }}</h1>
+
+    {% if saved %}
+        {% for item in saved %}
+            <div style="border:1px solid #ccc; padding:15px; margin-bottom:10px;">
+                <h3>{{ item.candidate.full_name }}</h3>
+                <p><strong>Field:</strong> {{ item.candidate.recommended_field }}</p>
+                <p><strong>Email:</strong> {{ item.candidate.email }}</p>
+
+                <a href="{% url 'candidate_detail' item.candidate.id %}">
+                    <button>View Profile</button>
+                </a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No saved candidates yet.</p>
+    {% endif %}
+
+</body>
+</html>
