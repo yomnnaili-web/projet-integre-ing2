@@ -20,7 +20,7 @@ def section1(request):
         }
         return redirect("section2")
 
-    return render(request, "section1.html")
+    return render(request, "section1/section1.html")
 
 
 def section2(request):
@@ -35,7 +35,7 @@ def section2(request):
         }
         return redirect("section3")
 
-    return render(request, "section2.html")
+    return render(request, "section1/section2.html")
 
 
 def section3(request):
@@ -51,7 +51,7 @@ def section3(request):
         }
         return redirect("section4")
 
-    return render(request, "section3.html")
+    return render(request, "section1/section3.html")
 
 
 def section4(request):
@@ -64,7 +64,7 @@ def section4(request):
         }
         return redirect("section5")
 
-    return render(request, "section4.html")
+    return render(request, "section1/section4.html")
 
 
 def section5(request):
@@ -76,7 +76,7 @@ def section5(request):
         }
         return redirect("section6-7")
 
-    return render(request, "section5.html")
+    return render(request, "section1/section5.html")
 
 
 def section6(request):
@@ -88,7 +88,7 @@ def section6(request):
         }
         return redirect("result")
 
-    return render(request, "section6-7.html")
+    return render(request, "section1/section6-7.html")
 
 
 def result(request):
@@ -593,7 +593,7 @@ def result(request):
     "all_scores": scores,
 }
 
-    return render(request, "result.html", context)
+    return render(request, "section1/result.html", context)
 
 
 def section8(request):
@@ -639,7 +639,7 @@ def section8(request):
 
         return redirect("final")
 
-    return render(request, "section8.html")
+    return render(request, "section1/section8.html")
 def calculate_company_candidate_match(company, candidate):
     score = 0
     reasons = []
@@ -828,20 +828,20 @@ def company_questionnaire(request):
             f"{', '.join(company.personality_required)}."
         )
 
-        return render(request, "company_results.html", {
+        return render(request, "section1/company_results.html", {
             "company": company,
             "best_matches": best_matches,
             "company_summary": company_summary,
         })
 
-    return render(request, "company_questionnaire.html")
+    return render(request, "section1/company_questionnaire.html")
 def candidate_detail(request, candidate_id):
     candidate = get_object_or_404(CandidateProfile, id=candidate_id)
 
     context = {
         "candidate": candidate,
     }
-    return render(request, "candidate_detail.html", context)
+    return render(request, "section1/candidate_detail.html", context)
 
 def save_candidate(request, company_id, candidate_id):
     company = get_object_or_404(CompanyProfile, id=company_id)
@@ -856,7 +856,7 @@ def saved_candidates(request, company_id):
     company = get_object_or_404(CompanyProfile, id=company_id)
     saved = SavedCandidate.objects.filter(company=company)
 
-    return render(request, "saved_candidates.html", {
+    return render(request, "section1/saved_candidates.html", {
         "company": company,
         "saved": saved
     })
