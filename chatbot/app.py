@@ -33,12 +33,12 @@ models = genai.list_models()
 WORKING_MODEL = None
 for m in models:
     print("Found model:", m.name)
-    if "gemini-1.5-flash" in m.name:
-        WORKING_MODEL = "gemini-1.5-flash"
+    if "gemini-2.5-flash" in m.name:
+        WORKING_MODEL = "gemini-2.5-flash"
         break
-if not WORKING_MODEL:
-    WORKING_MODEL = "gemini-pro"
 
+if not WORKING_MODEL:
+    WORKING_MODEL = "gemini-2.5-flash"
 print(f"✅ Using model: {WORKING_MODEL}")
 
 chat_histories = {}
@@ -78,6 +78,8 @@ def message():
     except Exception as e:
         logger.exception("Route error")
         return jsonify({"reply": f"❌ Error: {str(e)}"}), 500
+    
+
     
 if __name__ == "__main__":
     print("🚀 Running at http://127.0.0.1:5000")
