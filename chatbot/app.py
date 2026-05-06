@@ -96,6 +96,8 @@ def message():
         logger.exception("Route error")
         return jsonify({"reply": f"❌ Error: {str(e)}"}), 500
     
+
+    
 if __name__ == "__main__":
     print("🚀 Running at http://127.0.0.1:5000")
     app.run(debug=False, use_reloader=False)
