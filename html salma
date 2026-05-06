@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base target="_self">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careery - Professional Career Platform</title>
+    <meta name="description" content="Connect top talent with leading companies. Find your dream job or hire the best professionals.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563eb",
+                        secondary: "#1e40af",
+                        accent: "#3b82f6",
+                        dark: "#1f2937",
+                        light: "#f8fafc",
+                        success: "#10b981",
+                        warning: "#f59e0b",
+                        danger: "#ef4444"
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif']
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.3s ease-out',
+                        'pulse-slow': 'pulse 3s infinite'
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(10px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #2563eb;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .page-transition {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .progress-bar {
+            transition: width 0.3s ease;
+        }
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-light font-inter">
+    <!-- Navigation -->
+    <header class="sticky top-0 z-50 bg-white shadow-sm">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2 cursor-pointer" id="logo">
+                    <div class="w-10 h-10 rounded-lg gradient-bg flex items-center justify-center">
+                        <i class="fas fa-briefcase text-white text-xl"></i>
+                    </div>
+                    <h1 class="text-2xl font-bold text-dark">Careery</h1>
+                </div>
+                
+                <ul id="nav-list" class="hidden md:flex items-center space-x-8"></ul>
+                
+                <div class="flex items-center space-x-4">
+                    <button id="login-btn" class="px-4 py-2 text-primary font-medium hover:text-secondary transition">Log In</button>
+                    <button id="signup-btn" class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-secondary transition font-medium">Sign Up</button>
+                    <button id="mobile-menu-btn" class="md:hidden text-dark">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t pt-4">
+                <ul id="mobile-nav-list" class="space-y-3"></ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Container -->
+    <main id="main-content" class="page-transition">
+        <!-- Home Page -->
+        <div id="home-page" class="page-content">
+            <!-- Hero Section -->
+            <section class="gradient-bg text-white relative overflow-hidden">
+                <div class="absolute inset-0">
+                    <div class="absolute top-10 left-10 w-64 h-64 bg-white opacity-10 rounded-full"></div>
+                    <div class="absolute bottom-10 right-10 w-80 h-80 bg-white opacity-10 rounded-full"></div>
+                </div>
+                <div class="container mx-auto px-4 py-16 md:py-24 relative z-10">
+                    <div class="max-w-3xl mx-auto text-center">
+                        <h2 class="text-4xl md:text-5xl font-bold mb-6">Your Career Journey Starts Here</h2>
+                        <p class="text-xl mb-8 opacity-90">Find your dream job or hire the perfect talent. Our platform connects professionals with leading companies worldwide.</p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <button data-page="career-path" class="page-btn px-8 py-3 bg-white text-primary rounded-lg font-semibold hover:bg-gray-100 transition flex items-center justify-center space-x-2">
+                                <i class="fas fa-road"></i>
+                                <span>Career Path</span>
+                            </button>
+                            <button data-page="find-job" class="page-btn px-8 py-3 bg-transparent border-2 border-white text-white rounded-lg font-semibold hover:bg-white hover:text-primary transition flex items-center justify-center space-x-2">
+                                <i class="fas fa-search"></i>
+                                <span>Find a Job</span>
+                            </button>
+                            <button data-page="hire-talent" class="page-btn px-8 py-3 bg-transparent border-2 border-white text-white rounded-lg font-semibold hover:bg-white hover:text-primary transition flex items-center justify-center space-x-2">
+                                <i class="fas fa-users"></i>
+                                <span>Hire Talent</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Overview -->
+            <section class="py-16 bg-white">
+                <div class="container mx-auto px-4">
+                    <div class="text-center mb-12">
+                        <h3 class="text-3xl font-bold text-dark mb-4">Choose Your Path</h3>
+                        <p class="text-gray-600 max-w-2xl mx-auto">Select from our three main services to start your journey</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="card-hover bg-white rounded-xl p-8 border border-gray-200 text-center">
+                            <div class="w-16 h-16 rounded-full gradient-bg flex items-center justify-center mx-auto mb-6">
+                                <i class="fas fa-road text-white text-2xl"></i>
+                            </div>
+                            <h4 class="text-2xl font-bold text-dark mb-4">Career Path</h4>
+                            <p class="text-gray-600 mb-6">Explore different career domains and find the perfect path for your skills and interests.</p>
+                            <button data-page="career-path" class="page-btn px-6 py-2 bg-primary text-white rounded-lg font-semibold hover:bg-secondary transition">Explore Paths</button>
+                        </div>
+                        
+                        <div class="card-hover bg-white rounded-xl p-8 border border-gray-200 text-center">
+                            <div class="w-16 h-16 rounded-full gradient-bg flex items-center justify-center mx-auto mb-6">
+                                <i class="fas fa-search text-white text-2xl"></i>
+                            </div>
+                            <h4 class="text-2xl font-bold text-dark mb-4">Find a Job</h4>
+                            <p class="text-gray-600 mb-6">Search thousands of job opportunities, upload your CV, and prepare for interviews.</p>
+                            <button data-page="find-job" class="page-btn px-6 py-2 bg-primary text-white rounded-lg font-semibold hover:bg-secondary transition">Find Jobs</button>
+                        </div>
+                        
+                        <div class="card-hover bg-white rounded-xl p-8 border border-gray-200 text-center">
+                            <div class="w-16 h-16 rounded-full gradient-bg flex items-center justify-center mx-auto mb-6">
+                                <i class="fas fa-users text-white text-2xl"></i>
+                            </div>
+                            <h4 class="text-2xl font-bold text-dark mb-4">Hire Talent</h4>
+                            <p class="text-gray-600 mb-6">Post job openings, browse qualified candidates, and schedule interviews with top talent.</p>
+                            <button data-page="hire-talent" class="page-btn px-6 py-2 bg-primary text-white rounded-lg font-semibold hover:bg-secondary transition">Hire Now</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stats Section -->
+            <section class="py-16 bg-gray-50">
+                <div class="container mx-auto px-4">
+                    <div id="stats-container" class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center"></div>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section class="py-16 gradient-bg text-white">
+                <div class="container mx-auto px-4 text-center">
+                    <h3 class="text-3xl font-bold mb-6">Ready to Transform Your Career?</h3>
+                    <p class="text-xl mb-8 max-w-2xl mx-auto">Join thousands of professionals and companies already using Careery</p>
+                    <button id="get-started-btn" class="px-10 py-3 bg-white text-primary rounded-lg font-semibold text-lg hover:bg-gray-100 transition">Get Started Free</button>
+                </div>
+            </section>
+        </div>
+
+        <!-- Career Path Page -->
+        <div id="career-path-page" class="page-content hidden">
+            <section class="bg-white py-12">
+                <div class="container mx-auto px-4">
+                    <div class="flex items-center justify-between mb-8">
+                        <div>
+                            <h2 class="text-3xl font-bold text-dark">Career Path Explorer</h2>
+                            <p class="text-gray-600 mt-2">Discover different career domains and find your perfect path</p>
+                        </div>
+                        <button class="back-to-home px-4 py-2 text-primary hover:text-secondary font-medium flex items-center space-x-2">
+                            <i class="fas fa-arrow-left"></i>
+                            <span>Back to Home</span>
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <!-- Career Domains List -->
+                        <div class="lg:col-span-2">
+                            <div class="mb-8">
+                                <h3 class="text-2xl font-bold text-dark mb-6">Browse Career Domains</h3>
+                                <div id="career-domains-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+                            </div>
+
+                            <!-- Skills Assessment -->
+                            <div class="bg-gray-50 rounded-xl p-6">
+                                <h3 class="text-2xl font-bold text-dark mb-4">Skills Assessment</h3>
+                                <p class="text-gray-600 mb-6">Take our assessment to discover which career path matches your skills</p>
+                                <div class="space-y-4">
+                                    <div>
+                                        <div class="flex justify-between mb-1">
+                                            <span class="text-gray-700">Technical Skills</span>
+                                            <span class="text-primary font-semibold">75%</span>
+                                        </div>
+                                        <div class="w-full bg-gray-200 rounded-full h-2">
+                                            <div class="bg-primary h-2 rounded-full progress-bar" style="width: 75%"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between mb-1">
+                                            <span class="text-gray-700">Soft Skills</span>
+                                            <span class="text-primary font-semibold">60%</span>
+                                        </div>
+                                        <div class="w-full bg-gray-200 rounded-full h-2">
+                                            <div class="bg-primary h-2 rounded-full progress-bar" style="width: 60%"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between mb-1">
+                                            <span class="text-gray-700">Industry Knowledge</span>
+                                            <span class="text-primary font-semibold">45%</span>
+                                        </div>
+                                        <div class="w-full bg-gray-200 rounded-full h-2">
+                                            <div class="bg-primary h-2 rounded-full progress-bar" style="width: 45%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="mt-6 px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-secondary transition w-full">
+                                    Start Skills Assessment
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Career Recommendations -->
+                        <div class="space-y-6">
+                            <div class="bg-white border border-gray-200 rounded-xl p-6">
+                                <h4 class="text-xl font-bold text-dark mb-4">Recommended For You</h4>
+                                <div id="recommended-careers" class="space-y-4"></div>
+                            </div>
+
+                            <div class="bg-gradient-to-br from-primary to-accent text-white rounded-xl p-6">
+                                <h4 class="text-xl font-bold mb-4">Career Growth Tips</h4>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start space-x-3">
+                                        <i class="fas fa-check-circle mt-1"></i>
+                                        <span>Update your skills regularly</span>
+                                    </li>
+                                    <li class="flex items-start space-x-3">
+                                        <i class="fas fa-check-circle mt-1"></i>
+                                        <span>Network with professionals</span>
+                                    </li>
+                                    <li class="flex items-start space-x-3">
+                                        <i class="fas fa-check-circle mt-1"></i>
+                                        <span>Set clear career goals</span>
+                                    </li>
+                                    <li class="flex items-start space-x-3">
+                                        <i class="fas fa-check-circle mt-1"></i>
+                                        <span>Seek mentorship opportunities</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Find a Job Page -->
+        <div id="find-job-page" class="page-content hidden">
+            <section class="bg-white py-12">
+                <div class="container mx-auto px-4">
+                    <div class="flex items-center justify-between mb-8">
+                        <div>
+                            <h2 class="text-3xl font-bold text-dark">Find Your Dream Job</h2>
+                            <p class="text-gray-600 mt-2">Search, apply, and prepare for your next career move</p>
+                        </div>
+                        <button class="back-to-home px-4 py-2 text-primary hover:text-secondary font-medium flex items-center space-x-2">
+                            <i class="fas fa-arrow-left"></i>
+                            <span>Back to Home</span>
+                        </button>
+                    </div>
+
+                    <!-- Search Jobs Section -->
+                    <div class="mb-12">
+                        <h3 class="text-2xl font-bold text-dark mb-6">Search Jobs</h3>
+                        <div class="bg-white border border-gray-200 rounded-xl p-6">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                                <input type="text" placeholder="Job title, keywords, or company" class="px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                                <input type="text" placeholder="City, state, or remote" class="px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                                <select class="px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                                    <option value="">All Job Types</option>
+                                    <option value="full-time">Full Time</option>
+                                    <option value="part-time">Part Time</option>
+                                    <option value="contract">Contract</option>
+                                    <option value="remote">Remote</option>
+                                </select>
+                            </div>
+                            <button class="px-8 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-secondary transition flex items-center space-x-2">
+                                <i class="fas fa-search"></i>
+                                <span>Search Jobs</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <!-- Main Features -->
+                        <div class="lg:col-span-2">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <!-- Upload CV -->
+                                <div class="card-hover bg-white border border-gray-200 rounded-xl p-6">
+                                    <div class="w-12 h-12 rounded-lg gradient-bg flex items-center justify-center mb-4">
+                                        <i class="fas fa-file-upload text-white text-xl"></i>
+                                    </div>
+                                    <h4 class="text-xl font-bold text-dark mb-3">Upload CV</h4>
+                                    <p class="text-gray-600 mb-4">Upload your resume to get discovered by top employers</p>
+                                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center mb-4">
+                                        <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-3"></i>
+                                        <p class="text-gray-600">Drag & drop your CV here</p>
+                                        <p class="text-sm text-gray-500 mt-2">or click to browse</p>
+                                    </div>
+                                    <button class="w-full py-2 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition">
+                                        Upload CV
+                                    </button>
+                                </div>
+
+                                <!-- AI CV Review -->
+                                <div class="card-hover bg-white border border-gray-200 rounded-xl p-6">
+                                    <div class="w-12 h-12 rounded-lg gradient-bg flex items-center justify-center mb-4">
+                                        <i class="fas fa-robot text-white text-xl"></i>
+                                    </div>
+                                    <h4 class="text-xl font-bold text-dark mb-3">AI CV Review</h4>
+                                    <p class="text-gray-600 mb-4">Get instant feedback on your resume with our AI-powered review</p>
+                                    <div class="space-y-3 mb-4">
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-gray-700">ATS Compatibility</span>
+                                            <span class="text-success font-semibold">92%</span>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-gray-700">Keyword Optimization</span>
+                                            <span class="text-warning font-semibold">78%</span>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-gray-700">Format Score</span>
+                                            <span class="text-primary font-semibold">85%</span>
+                                        </div>
+                                    </div>
+                                    <button class="w-full py-2 bg-primary text-white rounded-lg font-medium hover:bg-secondary transition">
+                                        Review My CV
+                                    </button>
+                                </div>
+
+                                <!-- Soft Skills Test -->
+                                <div class="card-hover bg-white border border-gray-200 rounded-xl p-6">
+                                    <div class="w-12 h-12 rounded-lg gradient-bg flex items-center justify-center mb-4">
+                                        <i class="fas fa-brain text-white text-xl"></i>
+                                    </div>
+                                    <h4 class="text-xl font-bold text-dark mb-3">Soft Skills Test</h4>
+                                    <p class="text-gray-600 mb-4">Assess your communication, leadership, and teamwork skills</p>
+                                    <div class="mb-4">
+                                        <div class="flex justify-between mb-1">
+                                            <span class="text-gray-700">Test Progress</span>
+                                            <span class="text-primary font-semibold">3/5 completed</span>
+                                        </div>
+                                        <div class="w-full bg-gray-200 rounded-full h-2">
+                                            <div class="bg-primary h-2 rounded-full progress-bar" style="width: 60%"></div>
+                                        </div>
+                                    </div>
+                                    <button class="w-full py-2 bg-primary text-white rounded-lg font-medium hover:bg-secondary transition">
+                                        Continue Test
+                                    </button>
+                                </div>
+
+                                <!-- Interview Prep -->
+                                <div class="card-hover bg-white border border-gray-200 rounded-xl p-6">
+                                    <div class="w-12 h-12 rounded-lg gradient-bg flex items-center justify-center mb-4">
+                                        <i class="fas fa-comments text-white text-xl"></i>
+                                    </div>
+                                    <h4 class="text-xl font-bold text-dark mb-3">Interview Prep</h4>
+                                    <p class="text-gray-600 mb-4">Practice with mock interviews and common questions</p>
+                                    <div class="space-y-3 mb-4">
+                                        <div class="flex items-center space-x-3">
+                                            <i class="fas fa-video text-primary"></i>
+                                            <span class="text-gray-700">Mock Interviews</span>
+                                        </div>
+                                        <div class="flex items-center space-x-3">
+                                            <i class="fas fa-question-circle text-primary"></i>
+                                            <span class="text-gray-700">Common Questions</span>
+                                        </div>
+                                        <div class="flex items-center space-x-3">
+                                            <i class="fas fa-star text-primary"></i>
+                                            <span class="text-gray-700">Tips & Strategies</span>
+                                        </div>
+                                    </div>
+                                    <button class="w-full py-2 bg-primary text-white rounded-lg font-medium hover:bg-secondary transition">
+                                        Start Practice
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Job Listings Sidebar -->
+                        <div class="space-y-6">
+                            <div class="bg-white border border-gray-200 rounded-xl p-6">
+                                <h4 class="text-xl font-bold text-dark mb-4">Recent Job Listings</h4>
+                                <div id="recent-jobs" class="space-y-4"></div>
+                            </div>
+
+                            <div class="bg-gradient-to-br from-primary to-accent text-white rounded-xl p-6">
+                                <h4 class="text-xl font-bold mb-4">Application Status</h4>
+                                <div class="space-y-4">
+                                    <div class="flex justify-between items-center">
+                                        <span>Applications Sent</span>
+                                        <span class="font-bold">12</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span>Interviews Scheduled</span>
+                                        <span class="font-bold">3</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span>Offers Received</span>
+                                        <span class="font-bold">1</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Hire Talent Page -->
+        <div id="hire-talent-page" class="page-content hidden">
+            <section class="bg-white py-12">
+                <div class="container mx-auto px-4">
+                    <div class="flex items-center justify-between mb-8">
+                        <div>
+                            <h2 class="text-3xl font-bold text-dark">Hire Top Talent</h2>
+                            <p class="text-gray-600 mt-2">Find, evaluate, and hire the best professionals for your team</p>
+                        </div>
+                        <button class="back-to-home px-4 py-2 text-primary hover:text-secondary font-medium flex items-center space-x-2">
+                            <i class="fas fa-arrow-left"></i>
+                            <span>Back to Home</span>
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <!-- Main Features -->
+                        <div class="lg:col-span-2">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <!-- Company Profile -->
+                                <div class="card-hover bg-white border border-gray-200 rounded-xl p-6">
+                                    <div class="w-12 h-12 rounded-lg gradient-bg flex items-center justify-center mb-4">
+                                        <i class="fas fa-building text-white text-xl"></i>
+                                    </div>
+                                    <h4 class="text-xl font-bold text-dark mb-3">Company Profile</h4>
+                                    <p class="text-gray-600 mb-4">Create and manage your company profile to attract top talent</p>
+                                    <div class="space-y-3 mb-4">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
+                                                <i class="fas fa-image text-gray-500"></i>
+                                            </div>
+                                            <div>
+                                                <p class="font-medium">TechCorp Inc.</p>
+                                                <p class="text-sm text-gray-500">Profile 85% complete</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-gray-700">Profile Views</span>
+                                            <span class="text-primary font-semibold">1,245</span>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-gray-700">Active Jobs</span>
+                                            <span class="text-primary font-semibold">8</span>
+                                        </div>
+                                    </div>
+                                    <button class="w-full py-2 bg-primary text-white rounded-lg font-medium hover:bg-secondary transition">
+                                        Edit Profile
+                                    </button>
+                                </div>
+
+                                <!-- Post a Job -->
+                                <div class="card-hover bg-white border border-gray-200 rounded-xl p-6">
+                                    <div class="w-12 h-12 rounded-lg gradient-bg flex items-center justify-center mb-4">
+                                        <i class="fas fa-briefcase text-white text-xl"></i>
+                                    </div>
+                                    <h4 class="text-xl font-bold text-dark mb-3">Post a Job</h4>
+                                    <p class="text-gray-600 mb-4">Create job listings to attract qualified candidates</p>
+                                    <div class="space-y-3 mb-4">
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-gray-700">Active Listings</span>
+                                            <span class="text-success font-semibold">8</span>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-gray-700">Draft Listings</span>
+                                            <span class="text-warning font-semibold">2</span>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-gray-700">Total Applications</span>
+                                            <span class="text-primary font-semibold">342</span>
+                                        </div>
+                                    </div>
+                                    <button class="w-full py-2 bg-primary text-white rounded-lg font-medium hover:bg-secondary transition">
+                                        Post New Job
+                                    </button>
+                                </div>
+
+                                <!-- Browse CVs -->
+                                <div class="card-hover bg-white border border-gray-200 rounded-xl p-6">
+                                    <div class="w-12 h-12 rounded-lg gradient-bg flex items-center justify-center mb-4">
+                                        <i class="fas fa-database text-white text-xl"></i>
+                                    </div>
+                                    <h4 class="text-xl font-bold text-dark mb-3">Browse CVs</h4>
+                                    <p class="text-gray-600 mb-4">Search through thousands of qualified candidate profiles</p>
+                                    <div class="mb-4">
+                                        <div class="flex justify-between mb-2">
+                                            <span class="text-gray-700">CV Database</span>
+                                            <span class="text-primary font-semibold">50,000+ profiles</span>
+                                        </div>
+                                        <div class="grid grid-cols-3 gap-2">
+                                            <div class="text-center p-2 bg-blue-50 rounded">
+                                                <div class="text-lg font-bold text-primary">12,450</div>
+                                                <div class="text-xs text-gray-600">Tech</div>
+                                            </div>
+                                            <div class="text-center p-2 bg-green-50 rounded">
+                                                <div class="text-lg font-bold text-success">8,920</div>
+                                                <div class="text-xs text-gray-600">Business</div>
+                                            </div>
+                                            <div class="text-center p-2 bg-purple-50 rounded">
+                                                <div class="text-lg font-bold text-purple-600">5,670</div>
+                                                <div class="text-xs text-gray-600">Creative</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="w-full py-2 bg-primary text-white rounded-lg font-medium hover:bg-secondary transition">
+                                        Browse Candidates
+                                    </button>
+                                </div>
+
+                                <!-- Schedule Interviews -->
+                                <div class="card-hover bg-white border border-gray-200 rounded-xl p-6">
+                                    <div class="w-12 h-12 rounded-lg gradient-bg flex items-center justify-center mb-4">
+                                        <i class="fas fa-calendar-alt text-white text-xl"></i>
+                                    </div>
+                                    <h4 class="text-xl font-bold text-dark mb-3">Schedule Interviews</h4>
+                                    <p class="text-gray-600 mb-4">Manage and schedule interviews with candidates</p>
+                                    <div class="space-y-3 mb-4">
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-gray-700">Today's Interviews</span>
+                                            <span class="text-primary font-semibold">3</span>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-gray-700">This Week</span>
+                                            <span class="text-primary font-semibold">12</span>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-gray-700">Pending Confirmations</span>
+                                            <span class="text-warning font-semibold">5</span>
+                                        </div>
+                                    </div>
+                                    <button class="w-full py-2 bg-primary text-white rounded-lg font-medium hover:bg-secondary transition">
+                                        View Calendar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sidebar -->
+                        <div class="space-y-6">
+                            <!-- Recent Job Listings -->
+                            <div class="bg-white border border-gray-200 rounded-xl p-6">
+                                <h4 class="text-xl font-bold text-dark mb-4">Your Job Listings</h4>
+                                <div id="company-job-listings" class="space-y-4"></div>
+                            </div>
+
+                            <!-- Hiring Stats -->
+                            <div class="bg-gradient-to-br from-primary to-accent text-white rounded-xl p-6">
+                                <h4 class="text-xl font-bold mb-4">Hiring Statistics</h4>
+                                <div class="space-y-4">
+                                    <div class="flex justify-between items-center">
+                                        <span>Active Candidates</span>
+                                        <span class="font-bold">245</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span>Interviews This Month</span>
+                                        <span class="font-bold">28</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span>Hires This Quarter</span>
+                                        <span class="font-bold">15</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span>Avg. Time to Hire</span>
+                                        <span class="font-bold">23 days</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-6">
+                        <div class="w-10 h-10 rounded-lg gradient-bg flex items-center justify-center">
+                            <i class="fas fa-briefcase text-white text-xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold">Careery</h4>
+                    </div>
+                    <p class="text-gray-400">Connecting talent with opportunity since 2024</p>
+                </div>
+                
+                <div>
+                    <h5 class="font-semibold mb-4">For Job Seekers</h5>
+                    <ul id="footer-jobseekers" class="space-y-2 text-gray-400"></ul>
+                </div>
+                
+                <div>
+                    <h5 class="font-semibold mb-4">For Employers</h5>
+                    <ul id="footer-employers" class="space-y-2 text-gray-400"></ul>
+                </div>
+                
+                <div>
+                    <h5 class="font-semibold mb-4">Company</h5>
+                    <ul id="footer-company" class="space-y-2 text-gray-400"></ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Careery. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="login-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-xl max-w-md w-full p-6 animate-slide-up">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-dark">Log In</h3>
+                <button id="close-login-modal" class="text-gray-500 hover:text-dark">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <form id="login-form" class="space-y-4">
+                <div>
+                    <label class="block text-gray-700 mb-2">Email</label>
+                    <input type="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
+                </div>
+                <div>
+                    <label class="block text-gray-700 mb-2">Password</label>
+                    <input type="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
+                </div>
+                <button type="submit" class="w-full py-3 bg-primary text-white rounded-lg font-semibold hover:bg-secondary transition">Log In</button>
+            </form>
+            <p class="mt-4 text-center text-gray-600">Don't have an account? <button id="switch-to-signup" class="text-primary hover:underline">Sign up</button></p>
+        </div>
+    </div>
+
+    <div id="signup-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-xl max-w-md w-full p-6 animate-slide-up">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-dark">Create Account</h3>
+                <button id="close-signup-modal" class="text-gray-500 hover:text-dark">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <form id="signup-form" class="space-y-4">
+                <div>
+                    <label class="block text-gray-700 mb-2">Full Name</label>
+                    <input type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
+                </div>
+                <div>
+                    <label class="block text-gray-700 mb-2">Email</label>
+                    <input type="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
+                </div>
+                <div>
+                    <label class="block text-gray-700 mb-2">Password</label>
+                    <input type="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
+                </div>
+                <div>
+                    <label class="block text-gray-700 mb-2">Account Type</label>
+                    <select class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                        <option value="jobseeker">Job Seeker</option>
+                        <option value="employer">Employer</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full py-3 bg-primary text-white rounded-lg font-semibold hover:bg-secondary transition">Create Account</button>
+            </form>
+            <p class="mt-4 text-center text-gray-600">Already have an account? <button id="switch-to-login" class="text-primary hover:underline">Log in</button></p>
+        </div>
+    </div>
+
+    <script>
+        // Data Layer
+        const navigationItems = [
+            { "label": "Home", "href": "#home", "icon": "fas fa-home", "page": "home" },
+            { "label": "Career Path", "href": "#career-path", "icon": "fas fa-road", "page": "career-path" },
+            { "label": "Find a Job", "href": "#find-job", "icon": "fas fa-search", "page": "find-job" },
+            { "label": "Hire Talent", "href": "#hire-talent", "icon": "fas fa-users", "page": "hire-talent" }
+        ];
+
+        const careerDomains = [
+            { 
+                "name": "Technology", 
+                "description": "Software development, IT, cybersecurity, and tech innovation roles", 
+                "jobs": "1,240",
+                "growth": "High",
+                "salary": "$85k - $180k",
+                "icon": "fas fa-laptop-code",
+                "color": "bg-blue-100 text-blue-600"
+            },
+            { 
+                "name": "Healthcare", 
+                "description": "Medical, nursing, healthcare administration, and research positions", 
+                "jobs": "890",
+                "growth": "Very High",
+                "salary": "$65k - $150k",
+                "icon": "fas fa-heartbeat",
+                "color": "bg-red-100 text-red-600"
+            },
+            { 
+                "name": "Finance", 
+                "description": "Banking, investment, accounting, and financial analysis careers", 
+                "jobs": "1,150",
+                "growth": "Medium",
+                "salary": "$70k - $160k",
+                "icon": "fas fa-chart-line",
+                "color": "bg-green-100 text-green-600"
+            },
+            { 
+                "name": "Marketing", 
+                "description": "Digital marketing, branding, advertising, and market research", 
+                "jobs": "760",
+                "growth": "High",
+                "salary": "$55k - $120k",
+                "icon": "fas fa-bullhorn",
+                "color": "bg-purple-100 text-purple-600"
+            },
+            { 
+                "name": "Engineering", 
+                "description": "Civil, mechanical, electrical, and industrial engineering roles", 
+                "jobs": "980",
+                "growth": "Medium",
+                "salary": "$75k - $140k",
+                "icon": "fas fa-cogs",
+                "color": "bg-yellow-100 text-yellow-600"
+            },
+            { 
+                "name": "Design", 
+                "description": "UI/UX design, graphic design, product design, and creative roles", 
+                "jobs": "540",
+                "growth": "High",
+                "salary": "$60k - $110k",
+                "icon": "fas fa-palette",
+                "color": "bg-pink-100 text-pink-600"
+            }
+        ];
+
+        const recommendedCareers = [
+            { "name": "Full Stack Developer", "match": "92%", "salary": "$95k - $160k" },
+            { "name": "Data Scientist", "match": "88%", "salary": "$105k - $180k" },
+            { "name": "Product Manager", "match": "85%", "salary": "$110k - $190k" },
+            { "name": "UX Designer", "match": "82%", "salary": "$85k - $140k" }
+        ];
+
+        const recentJobs = [
+            { "title": "Senior Frontend Developer", "company": "TechCorp", "location": "Remote", "type": "Full-time", "salary": "$120k - $160k" },
+            { "title": "Product Manager", "company": "Innovate Inc", "location": "New York", "type": "Full-time", "salary": "$130k - $180k" },
+            { "title": "Data Analyst", "company": "DataWorks", "location": "Chicago", "type": "Contract", "salary": "$85k - $110k" },
+            { "title": "UX Designer", "company": "Creative Labs", "location": "San Francisco", "type": "Full-time", "salary": "$95k - $140k" }
+        ];
+
+        const companyJobListings = [
+            { "title": "Senior Software Engineer", "applicants": "45", "status": "Active", "date": "2 days ago" },
+            { "title": "Marketing Manager", "applicants": "28", "status": "Active", "date": "1 week ago" },
+            { "title": "Data Scientist", "applicants": "62", "status": "Active", "date": "3 days ago" },
+            { "title": "Product Designer", "applicants": "34", "status": "Closed", "date": "2 weeks ago" }
+        ];
+
+        const stats = [
+            { "value": "50,000+", "label": "Active Professionals" },
+            { "value": "2,500+", "label": "Companies Hiring" },
+            { "value": "85%", "label": "Match Success Rate" },
+            { "value": "30 days", "label": "Avg. Hiring Time" }
+        ];
+
+        const footerJobseekersLinks = [
+            { "label": "Find Jobs", "href": "#find-jobs" },
+            { "label": "Upload CV", "href": "#upload-cv" },
+            { "label": "Skill Tests", "href": "#skill-tests" },
+            { "label": "Career Advice", "href": "#career-advice" }
+        ];
+
+        const footerEmployersLinks = [
+            { "label": "Post a Job", "href": "#post-job" },
+            { "label": "Browse Talent", "href": "#browse-talent" },
+            { "label": "Pricing", "href": "#pricing" },
+            { "label": "Employer Resources", "href": "#resources" }
+        ];
+
+        const footerCompanyLinks = [
+            { "label": "About Us", "href": "#about" },
+            { "label": "Contact", "href": "#contact" },
+            { "label": "Privacy Policy", "href": "#privacy" },
+            { "label": "Terms of Service", "href": "#terms" }
+        ];
+
+        // Reusable Render Functions
+        function renderNavigation(items) {
+            return items.map(item => 
+                `<li>
+                    <button data-page="${item.page}" class="page-btn nav-link text-dark hover:text-primary font-medium flex items-center space-x-2">
+                        <i class="${item.icon}"></i>
+                        <span>${item.label}</span>
+                    </button>
+                </li>`
+            ).join("");
+        }
+
+        function renderCareerDomains(items) {
+            return items.map(item => 
+                `<div class="card-hover bg-white rounded-xl p-6 border border-gray-200">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="${item.color} w-12 h-12 rounded-lg flex items-center justify-center">
+                            <i class="${item.icon} text-xl"></i>
+                        </div>
+                        <span class="text-sm font-semibold ${item.growth === 'High' || item.growth === 'Very High' ? 'text-green-600' : 'text-yellow-600'}">
+                            ${item.growth} Growth
+                        </span>
+                    </div>
+                    <h4 class="text-xl font-bold text-dark mb-2">${item.name}</h4>
+                    <p class="text-gray-600 text-sm mb-3">${item.description}</p>
+                    <div class="flex justify-between items-center text-sm">
+                        <span class="text-gray-700">${item.jobs} jobs</span>
+                        <span class="font-semibold text-primary">${item.salary}</span>
+                    </div>
+                    <button class="mt-4 text-primary font-medium hover:text-secondary flex items-center space-x-2">
+                        <span>Explore ${item.name}</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>`
+            ).join("");
+        }
+
+        function renderRecommendedCareers(items) {
+            return items.map(item => 
+                `<div class="p-3 bg-gray-50 rounded-lg">
+                    <div class="flex justify-between items-start mb-2">
+                        <h5 class="font-semibold text-dark">${item.name}</h5>
+                        <span class="text-xs px-2 py-1 bg-green-100 text-green-700 rounded-full">${item.match} match</span>
+                    </div>
+                    <div class="text-sm text-gray-600">${item.salary}</div>
+                    <button class="mt-2 text-sm text-primary hover:text-secondary font-medium">View Details</button>
+                </div>`
+            ).join("");
+        }
+
+        function renderRecentJobs(items) {
+            return items.map(item => 
+                `<div class="p-4 border border-gray-200 rounded-lg">
+                    <h5 class="font-bold text-dark mb-1">${item.title}</h5>
+                    <div class="flex items-center text-sm text-gray-600 mb-2">
+                        <i class="fas fa-building mr-2"></i>
+                        <span>${item.company}</span>
+                        <i class="fas fa-map-marker-alt mx-2"></i>
+                        <span>${item.location}</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm px-2 py-1 bg-blue-100 text-blue-700 rounded">${item.type}</span>
+                        <span class="font-semibold text-primary">${item.salary}</span>
+                    </div>
+                </div>`
+            ).join("");
+        }
+
+        function renderCompanyJobListings(items) {
+            return items.map(item => 
+                `<div class="p-3 border border-gray-200 rounded-lg">
+                    <div class="flex justify-between items-start mb-2">
+                        <h5 class="font-semibold text-dark">${item.title}</h5>
+                        <span class="text-xs px-2 py-1 ${item.status === 'Active' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700'} rounded">
+                            ${item.status}
+                        </span>
+                    </div>
+                    <div class="flex justify-between items-center text-sm text-gray-600">
+                        <span>${item.applicants} applicants</span>
+                        <span>${item.date}</span>
+                    </div>
+                    <button class="mt-2 w-full py-1 text-sm bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition">
+                        View Applicants
+                    </button>
+                </div>`
+            ).join("");
+        }
+
+        function renderStats(items) {
+            return items.map(item => 
+                `<div class="text-center">
+                    <div class="text-4xl font-bold text-primary mb-2">${item.value}</div>
+                    <div class="text-gray-600">${item.label}</div>
+                </div>`
+            ).join("");
+        }
+
+        function renderFooterLinks(items) {
+            return items.map(item => 
+                `<li>
+                    <a href="${item.href}" class="hover:text-white transition">${item.label}</a>
+                </li>`
+            ).join("");
+        }
+
+        // Page Management
+        let currentPage = 'home';
+
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page-content').forEach(page => {
+                page.classList.add('hidden');
+            });
+            
+            // Show selected page
+            const pageElement = document.getElementById(`${pageId}-page`);
+            if (pageElement) {
+                pageElement.classList.remove('hidden');
+                currentPage = pageId;
+                
+                // Add animation
+                pageElement.classList.add('animate-fade-in');
+                setTimeout(() => {
+                    pageElement.classList.remove('animate-fade-in');
+                }, 500);
+            }
+        }
+
+        // Page Initialization
+        document.addEventListener("DOMContentLoaded", function() {
+            // Render all sections
+            document.getElementById("nav-list").innerHTML = renderNavigation(navigationItems);
+            document.getElementById("mobile-nav-list").innerHTML = renderNavigation(navigationItems);
+            document.getElementById("stats-container").innerHTML = renderStats(stats);
+            document.getElementById("career-domains-grid").innerHTML = renderCareerDomains(careerDomains);
+            document.getElementById("recommended-careers").innerHTML = renderRecommendedCareers(recommendedCareers);
+            document.getElementById("recent-jobs").innerHTML = renderRecentJobs(recentJobs);
+            document.getElementById("company-job-listings").innerHTML = renderCompanyJobListings(companyJobListings);
+            document.getElementById("footer-jobseekers").innerHTML = renderFooterLinks(footerJobseekersLinks);
+            document.getElementById("footer-employers").innerHTML = renderFooterLinks(footerEmployersLinks);
+            document.getElementById("footer-company").innerHTML = renderFooterLinks(footerCompanyLinks);
+
+            // Page Navigation
+            document.querySelectorAll('.page-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const page = this.getAttribute('data-page');
+                    showPage(page);
+                });
+            });
+
+            // Back to home buttons
+            document.querySelectorAll('.back-to-home').forEach(btn => {
+                btn.addEventListener('click', () => showPage('home'));
+            });
+
+            // Logo click
+            document.getElementById('logo').addEventListener('click', () => showPage('home'));
+
+            // Mobile Menu Toggle
+            const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+            const mobileMenu = document.getElementById("mobile-menu");
+            
+            mobileMenuBtn.addEventListener("click", function() {
+                mobileMenu.classList.toggle("hidden");
+                const icon = mobileMenuBtn.querySelector("i");
+                if (mobileMenu.classList.contains("hidden")) {
+                    icon.className = "fas fa-bars text-xl";
+                } else {
+                    icon.className = "fas fa-times text-xl";
+                }
+            });
+
+            // Modal Management
+            const loginBtn = document.getElementById("login-btn");
+            const signupBtn = document.getElementById("signup-btn");
+            const loginModal = document.getElementById("login-modal");
+            const signupModal = document.getElementById("signup-modal");
+            const closeLoginModal = document.getElementById("close-login-modal");
+            const closeSignupModal = document.getElementById("close-signup-modal");
+            const switchToSignup = document.getElementById("switch-to-signup");
+            const switchToLogin = document.getElementById("switch-to-login");
+
+            function showModal(modal) {
+                modal.classList.remove("hidden");
+                modal.classList.add("flex");
+            }
+
+            function hideModal(modal) {
+                modal.classList.add("hidden");
+                modal.classList.remove("flex");
+            }
+
+            loginBtn.addEventListener("click", () => showModal(loginModal));
+            signupBtn.addEventListener("click", () => showModal(signupModal));
+            closeLoginModal.addEventListener("click", () => hideModal(loginModal));
+            closeSignupModal.addEventListener("click", () => hideModal(signupModal));
+            
+            switchToSignup.addEventListener("click", () => {
+                hideModal(loginModal);
+                setTimeout(() => showModal(signupModal), 300);
+            });
+            
+            switchToLogin.addEventListener("click", () => {
+                hideModal(signupModal);
+                setTimeout(() => showModal(loginModal), 300);
+            });
+
+            // Close modals when clicking outside
+            [loginModal, signupModal].forEach(modal => {
+                modal.addEventListener("click", (e) => {
+                    if (e.target === modal) {
+                        hideModal(modal);
+                    }
+                });
+            });
+
+            // Form Submissions
+            document.getElementById("login-form").addEventListener("submit", function(e) {
+                e.preventDefault();
+                alert("Login successful!");
+                hideModal(loginModal);
+            });
+
+            document.getElementById("signup-form").addEventListener("submit", function(e) {
+                e.preventDefault();
+                alert("Account created successfully!");
+                hideModal(signupModal);
+            });
+
+            // Get Started Button
+            document.getElementById("get-started-btn").addEventListener("click", function() {
+                showModal(signupModal);
+            });
+
+            // Interactive Progress Bars
+            const progressBars = document.querySelectorAll('.progress-bar');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 300);
+            });
+
+            // CV Upload Interaction
+            const cvUploadArea = document.querySelector('.border-dashed');
+            if (cvUploadArea) {
+                cvUploadArea.addEventListener('click', function() {
+                    alert("CV upload dialog would open here");
+                });
+            }
+
+            // Initialize page
+            showPage('home');
+        });
+    </script>
+</body>
+</html>
