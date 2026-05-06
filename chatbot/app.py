@@ -3,8 +3,9 @@ import uuid
 import logging
 from pathlib import Path
 from dotenv import load_dotenv
-from flask import Flask, render_template, request, jsonify, make_response
-from google import genai
+from flask import Flask, render_template, request, jsonify, make_response, send_from_directory
+import google.generativeai as genai
+
 
 env_path = Path(__file__).resolve().parent / ".env"
 print("Looking for .env at:", env_path)
@@ -26,34 +27,19 @@ if not api_key:
     exit(1)
 
 # Init client
-client = genai.Client(api_key=api_key)
-
-# 🔍 Detect working model automatically
-print("🔍 Detecting available models...")
+client = genai.configure(api_key=api_key)
+models = genai.list_models()
 
 WORKING_MODEL = None
+for m in models:
+    print("Found model:", m.name)
+    if "gemini-1.5-flash" in m.name:
+        WORKING_MODEL = "gemini-1.5-flash"
+        break
+if not WORKING_MODEL:
+    WORKING_MODEL = "gemini-pro"
 
-try:
-    models = client.models.list()
-
-    for m in models:
-        print("Found model:", m.name)
-
-        # pick first usable Gemini model
-        if "gemini" in m.name.lower():
-            WORKING_MODEL = m.name
-            break
-
-    if not WORKING_MODEL:
-        print("❌ No Gemini models available for this API key")
-        exit(1)
-
-    print(f"✅ Using model: {WORKING_MODEL}")
-
-except Exception as e:
-    print("❌ Cannot list models:", e)
-    exit(1)
-
+print(f"✅ Using model: {WORKING_MODEL}")
 
 chat_histories = {}
 
@@ -68,7 +54,9 @@ def home():
     chat_histories[session_id] = []
     return resp
 
-
+@app.route("/static/<path:filename>")
+def static_files(filename):
+    return send_from_directory('static', filename)
 
 @app.route("/message", methods=["POST"])
 def message():
@@ -77,18 +65,13 @@ def message():
 
     print("=== /message hit ===")
     print("User input:", user_input)
-    print("Key preview:", api_key[:10] if api_key else "None")
-    print("Model:", WORKING_MODEL)
 
     if not user_input:
         return jsonify({"reply": "Please enter a message."}), 400
 
     try:
-        response = client.models.generate_content(
-            model=WORKING_MODEL,
-            contents=user_input
-        )
-
+        model = genai.GenerativeModel(WORKING_MODEL)
+        response = model.generate_content(user_input)
         reply = response.text or "No response text returned."
         return jsonify({"reply": reply}), 200
 
@@ -100,4 +83,4 @@ def message():
     
 if __name__ == "__main__":
     print("🚀 Running at http://127.0.0.1:5000")
-    app.run(debug=False, use_reloader=False)
+    app.run(debug=True, use_reloader=False)

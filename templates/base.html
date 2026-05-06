@@ -14,8 +14,9 @@
                 <li><a href="{% url 'home' %}">Accueil</a></li>
                 <li><a href="{% url 'domaines' %}">Domaines</a></li>
                 <li><a href="{% url 'metiers' %}">Métiers</a></li>
+                <li><a href="http://127.0.0.1:5000/" target="_blank">Chatbot</a></li>
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'questionnaire' %}">Questionnaire</a></li>
+<a href="{% url 'section1' %}">Questionnaire</a>
                     <li><a href="{% url 'logout' %}">Déconnexion</a></li>
                 {% else %}
                     <li><a href="{% url 'login' %}">Connexion</a></li>

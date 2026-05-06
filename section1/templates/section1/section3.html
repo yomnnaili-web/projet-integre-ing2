@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section 3 - Work Environment</title>
+</head>
+<body>
+
+    <h1>Section 3</h1>
+    <h2>SECTION: WORK ENVIRONMENT PREFERENCES</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <p>14. You perform best in:</p>
+        <label><input type="checkbox" name="q14" value="structured"> Highly structured environments</label><br>
+        <label><input type="checkbox" name="q14" value="dynamic"> Fast-paced dynamic environments</label><br>
+        <label><input type="checkbox" name="q14" value="stable"> Calm stable environments</label><br>
+        <label><input type="checkbox" name="q14" value="creative_env"> Creative flexible environments</label><br><br>
+
+        <p>15. If your manager gives you full autonomy:</p>
+        <label><input type="checkbox" name="q15" value="uncomfortable"> I feel uncomfortable</label><br>
+        <label><input type="checkbox" name="q15" value="motivated"> I feel motivated</label><br>
+        <label><input type="checkbox" name="q15" value="lost"> I feel lost</label><br>
+        <label><input type="checkbox" name="q15" value="empowered"> I feel empowered</label><br><br>
+
+        <p>16. Ideal workplace:</p>
+        <label><input type="checkbox" name="q16" value="big_company"> Big international company</label><br>
+        <label><input type="checkbox" name="q16" value="startup"> Startup</label><br>
+        <label><input type="checkbox" name="q16" value="remote_company"> Remote digital company</label><br>
+        <label><input type="checkbox" name="q16" value="public"> Public institution</label><br><br>
+
+        <p>17. Preferred schedule:</p>
+        <label><input type="checkbox" name="q17" value="fixed"> Fixed hours</label><br>
+        <label><input type="checkbox" name="q17" value="flexible"> Flexible</label><br>
+        <label><input type="checkbox" name="q17" value="project"> Project-based</label><br><br>
+
+        <p>18. Work location preference:</p>
+        <label><input type="checkbox" name="q18" value="tunisia"> Tunisia</label><br>
+        <label><input type="checkbox" name="q18" value="abroad"> Abroad</label><br>
+        <label><input type="checkbox" name="q18" value="remote"> Remote international</label><br>
+        <label><input type="checkbox" name="q18" value="no_pref"> No preference</label><br><br>
+
+        <p>19. Risk tolerance:</p>
+        <label><input type="checkbox" name="q19" value="low_risk"> Prefer stability</label><br>
+        <label><input type="checkbox" name="q19" value="moderate_risk"> Moderate risk</label><br>
+        <label><input type="checkbox" name="q19" value="high_risk"> High risk</label><br><br>
+
+        <p>20. Work-life balance importance:</p>
+        <label><input type="checkbox" name="q20" value="very_important"> Very important</label><br>
+        <label><input type="checkbox" name="q20" value="important"> Important but flexible</label><br>
+        <label><input type="checkbox" name="q20" value="career_first"> Career growth first</label><br><br>
+
+        <button type="submit">Next</button>
+    </form>
+
+</body>
+</html>

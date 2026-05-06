@@ -4,6 +4,10 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.db.models import Count
 from .models import Domaine, Metier, Question, ChoixReponse, ReponseUtilisateur
+from django.shortcuts import render
+
+def questionnaire(request):
+    return render(request, 'questionnaire.html')
 
 def home(request):
     domaines_count = Domaine.objects.count()

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section 1 - Education</title>
+</head>
+<body>
+
+    <h1>Section 1</h1>
+    <h2>SECTION: EDUCATION & ACADEMIC BACKGROUND</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <p>1. Do you have a Baccalauréat?</p>
+        <label><input type="radio" name="bac" value="yes" required> Yes</label><br>
+        <label><input type="radio" name="bac" value="no"> No (Still studying)</label><br><br>
+
+        <p>2. What is your Bac section?</p>
+        <select name="bac_section" required>
+            <option value="">-- Select --</option>
+            <option value="math">Sciences Math</option>
+            <option value="exp">Sciences Expérimentales</option>
+            <option value="tech">Sciences Techniques</option>
+            <option value="info">Sciences Informatique</option>
+            <option value="eco">Economie & Gestion</option>
+            <option value="lettres">Lettres</option>
+            <option value="other">Other</option>
+        </select><br><br>
+
+        <p>3. What was your Bac average?</p>
+        <select name="average" required>
+            <option value="">-- Select --</option>
+            <option value="low">10–12</option>
+            <option value="medium">12–14</option>
+            <option value="good">14–16</option>
+            <option value="excellent">16+</option>
+        </select><br><br>
+
+        <p>4. Are you currently:</p>
+        <select name="status" required>
+            <option value="">-- Select --</option>
+            <option value="highschool">High school student</option>
+            <option value="university">University student</option>
+            <option value="graduated">Graduated</option>
+            <option value="stopped">Stopped studying</option>
+        </select><br><br>
+
+        <p>5. Type of studies?</p>
+        <select name="study_type" required>
+            <option value="">-- Select --</option>
+            <option value="engineering">Engineering</option>
+            <option value="medical">Medical / Health</option>
+            <option value="business">Business</option>
+            <option value="it">IT</option>
+            <option value="arts">Arts</option>
+            <option value="law">Law</option>
+            <option value="other">Other</option>
+        </select><br><br>
+
+        <p>6. Do you want to:</p>
+        <label><input type="checkbox" name="future_choice" value="same"> Continue same field</label><br>
+        <label><input type="checkbox" name="future_choice" value="change"> Change field</label><br>
+        <label><input type="checkbox" name="future_choice" value="unsure"> Not sure</label><br><br>
+
+        <p>7. If change, why?</p>
+        <label><input type="checkbox" name="change_reason" value="not_passion"> Not passionate</label><br>
+        <label><input type="checkbox" name="change_reason" value="difficult"> Too difficult</label><br>
+        <label><input type="checkbox" name="change_reason" value="family"> Family pressure</label><br>
+        <label><input type="checkbox" name="change_reason" value="better"> Better opportunities</label><br><br>
+
+        <button type="submit">Next</button>
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Result</title>
+</head>
+<body>
+
+<h1>Your Career Personality Result</h1>
+
+<!-- PERSONAL MESSAGE -->
+<p><em>{{ personal_message }}</em></p>
+
+{% if result_type == "hybrid" %}
+    <h2>Hybrid Profile</h2>
+    <p>
+        You combine <strong>{{ primary_match }}</strong> and
+        <strong>{{ secondary_match }}</strong>.
+    </p>
+{% else %}
+    <h2>Recommended Domain</h2>
+{% endif %}
+
+<h3>{{ field }}</h3>
+
+<p><strong>Score:</strong> {{ top_score }}</p>
+<p><strong>Confidence:</strong> {{ confidence_level }}</p>
+
+<p>{{ ai_insight }}</p>
+
+<hr>
+
+<h2>{{ personality_title }}</h2>
+<p>{{ personality_description }}</p>
+
+<h3>Why this fits you</h3>
+<p>{{ why_this_fits }}</p>
+
+<h3>Your strengths</h3>
+<ul>
+    {% for item in strengths %}
+        <li>{{ item }}</li>
+    {% endfor %}
+</ul>
+
+<h3>Possible challenges</h3>
+<ul>
+    {% for item in challenges %}
+        <li>{{ item }}</li>
+    {% endfor %}
+</ul>
+
+<h3>Career examples</h3>
+<ul>
+    {% for item in career_examples %}
+        <li>{{ item }}</li>
+    {% endfor %}
+</ul>
+
+<h3>How we can help you</h3>
+<ul>
+    {% for item in how_we_help %}
+        <li>{{ item }}</li>
+    {% endfor %}
+</ul>
+
+<hr>
+
+<!-- 🔥 ACTION PLAN -->
+<h3>Your next steps</h3>
+<ul>
+    {% for step in next_steps %}
+        <li>{{ step }}</li>
+    {% endfor %}
+</ul>
+
+<hr>
+
+<h3>Other strong matches</h3>
+<p>{{ secondary_match }}</p>
+
+<!-- SCORE VISUAL -->
+<h3>All domain scores</h3>
+
+{% for domain, value in all_scores.items %}
+    <div style="margin-bottom:10px;">
+        <strong>{{ domain }}</strong>
+        <div style="background:#ddd; width:200px;">
+            <div style="background:#4CAF50; width:{{ value|add:"0" }}0px; color:white;">
+                {{ value }}
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+<br>
+
+<a href="{% url 'section8' %}">
+    <button>Continue</button>
+</a>
+
+</body>
+</html>

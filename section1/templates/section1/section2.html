@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section 2 - Personality</title>
+</head>
+<body>
+
+    <h1>Section 2</h1>
+    <h2>SECTION: PERSONALITY & WORK STYLE</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <p>8. When facing a complex problem, you:</p>
+        <label><input type="checkbox" name="q8" value="logical"> Break it into logical steps</label><br>
+        <label><input type="checkbox" name="q8" value="creative"> Think creatively</label><br>
+        <label><input type="checkbox" name="q8" value="collaborative"> Ask others</label><br>
+        <label><input type="checkbox" name="q8" value="action"> Take action immediately</label><br><br>
+
+        <p>9. In a group project, you usually:</p>
+        <label><input type="checkbox" name="q9" value="leader"> Take leadership</label><br>
+        <label><input type="checkbox" name="q9" value="organizer"> Organize and structure</label><br>
+        <label><input type="checkbox" name="q9" value="focused"> Focus on your part</label><br>
+        <label><input type="checkbox" name="q9" value="motivator"> Motivate others</label><br><br>
+
+        <p>10. How do you react under pressure?</p>
+        <label><input type="checkbox" name="q10" value="calm"> Stay calm and logical</label><br>
+        <label><input type="checkbox" name="q10" value="stressed"> Feel stressed but continue</label><br>
+        <label><input type="checkbox" name="q10" value="support"> Seek support</label><br>
+        <label><input type="checkbox" name="q10" value="energized"> Feel energized</label><br><br>
+
+        <p>11. Which statement describes you best?</p>
+        <label><input type="checkbox" name="q11" value="structure"> I need structure and rules</label><br>
+        <label><input type="checkbox" name="q11" value="freedom"> I need creative freedom</label><br>
+        <label><input type="checkbox" name="q11" value="purpose"> I need purpose</label><br>
+        <label><input type="checkbox" name="q11" value="growth"> I need growth</label><br><br>
+
+        <p>12. In social situations, you:</p>
+        <label><input type="checkbox" name="q12" value="deep"> Prefer deep conversations</label><br>
+        <label><input type="checkbox" name="q12" value="group"> Enjoy large groups</label><br>
+        <label><input type="checkbox" name="q12" value="listener"> Listen more</label><br>
+        <label><input type="checkbox" name="q12" value="influence"> Influence others</label><br><br>
+
+        <p>13. What drains your energy most?</p>
+        <label><input type="checkbox" name="q13" value="routine"> Repetitive routine</label><br>
+        <label><input type="checkbox" name="q13" value="chaos"> Chaos</label><br>
+        <label><input type="checkbox" name="q13" value="isolation"> Isolation</label><br>
+        <label><input type="checkbox" name="q13" value="slow"> Slow progress</label><br><br>
+
+        <button type="submit">Next</button>
+    </form>
+
+</body>
+</html>
