@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class CandidateProfile(models.Model):
     full_name = models.CharField(max_length=150, blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
@@ -72,8 +73,22 @@ class CompanyCandidateMatch(models.Model):
 
     def __str__(self):
         return f"{self.company.company_name} - {self.candidate} ({self.match_score})"
+
+
 class SavedCandidate(models.Model):
     company = models.ForeignKey(CompanyProfile, on_delete=models.CASCADE)
     candidate = models.ForeignKey(CandidateProfile, on_delete=models.CASCADE)
 
     created_at = models.DateTimeField(auto_now_add=True)
+
+
+class PageTemplate(models.Model):
+    """Stores HTML templates for the multi-step questionnaire pages."""
+
+    key = models.CharField(max_length=50, unique=True)
+    html_content = models.TextField()
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.key
+

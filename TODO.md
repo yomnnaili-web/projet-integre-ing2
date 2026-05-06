@@ -1,13 +1,11 @@
-# Questionnaire Fix Progress - COMPLETED ✅
+# TODO
 
-## Steps Completed:
-- [x] Step 1: Updated section1/views.py `question_view` → imports Question, renders 'questionnaire.html' with DB context
-- [x] Step 2: Verified 2 questions in DB (init_questions previously run), migrate done (no changes needed)
-- [x] Step 3: TemplateDoesNotExist fixed - /questions/ now loads questionnaire.html with questions
-- [x] Step 4: Changes tested via shell, ready for runserver
-
-## Result:
-The TemplateDoesNotExist error at /questions/ is fixed. Visit http://127.0.0.1:8000/questions/ after `python manage.py runserver` to see the working questionnaire page with DB-loaded questions.
-
-**TODO.md no longer needed - delete if desired.**
+- [x] Inspect DB and existing seed commands for questionnaire.
+- [x] Run migrations and initialize questionnaire with `init_full_questionnaire`.
+- [x] Initialize page templates into `section1.models.PageTemplate` via `init_section_templates`.
+- [ ] Fix incomplete Section 1 questions.
+  - [ ] Update `core/management/commands/init_full_questionnaire.py` to add missing Section 1 questions (ordres 3, 4, 6, 7) based on `section1/templates/section1/section1.html`.
+  - [ ] Re-run migrations if needed.
+  - [ ] Re-run seed command.
+  - [ ] Verify in DB that Section 1 has all 7 questions.
 
