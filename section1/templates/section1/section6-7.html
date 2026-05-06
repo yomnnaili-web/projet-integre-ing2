@@ -4,16 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Section 6 - Financial & Languages</title>
+    <link rel="stylesheet" href="/static/css/section1.css">
 </head>
 <body>
+<div class="section1-page">
 
     <h1>Section 6</h1>
     <h2>SECTION: FINANCIAL CAPACITY</h2>
+
+    <div class="section1-shell">
+
+    <div class="section1-card">
 
     <form method="POST">
         {% csrf_token %}
 
         <p>28. Are you able to invest in further studies or certifications?</p>
+
         <label><input type="radio" name="q28" value="yes" required> Yes</label><br>
         <label><input type="radio" name="q28" value="limited"> Limited budget</label><br>
         <label><input type="radio" name="q28" value="no"> No</label><br><br>
@@ -33,7 +40,9 @@
         <label><input type="checkbox" name="q30" value="english"> English</label><br><br>
 
         <button type="submit">See Result</button>
+
     </form>
 
+</div>
 </body>
 </html>
